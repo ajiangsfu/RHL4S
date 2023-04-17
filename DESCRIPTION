@@ -1,0 +1,18 @@
+Package: RHL4S
+Type: Package
+Title: RHL4S classification for IHC data
+Version: 0.1.0
+Author: Aixiang Jiang, Yifan Yin, and Alex Xu
+Maintainer: Maintainer: Aixiang Jiang <aijiang@bccrc.ca>
+Depends: R (>= 4.0)
+Suggests: knitr
+VignetteBuilder: knitr
+Imports: data.table, dplyr, tidyr, readxl, spatstat.geom, magrittr,
+        stringr
+Description: This package combines IHC data, filters low quality cells, calculates spatial scores at cell level, summarizes to sample level spatial score,
+      uses RHL4S model to calculates LPS (Linear Prediction Score), Empirical Bayes' probabilities, makes RHL4S classification for IHC data
+License: MIT + file LICENSE
+Encoding: UTF-8
+RoxygenNote: 7.2.3
+NeedsCompilation: no
+Packaged: 2023-04-06 22:05:21 UTC; aijiang
