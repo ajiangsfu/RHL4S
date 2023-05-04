@@ -1,15 +1,12 @@
-
-#' @title Merge IHC data into a single data frame
-#' @description
-#' Please notice that the subfolders' names and content are hard coded, further changes are needed if data names and formats are changed
-#'
-#' @param path the location where the IHC data is stored. Under the path, there should be 6 separate folders which contain the IHC output
-#'        for each markers. The name for each subfolder is the marker name e.g. CD30, CD20 and etc.
-#' @param markerFolders the IHC raw data folder needed for RHL4S, you could have other subfolders, but at least these subfolders should be included
-#' @return
-#'        a dataframe which contains the marker signal for CD30, CD4, CD68, CD20 and PD1
+#' @title Merge MC-IF data into a single data frame
+#' @description This function reads in MC-IF data stored in six separate subfolders, one for each marker (e.g. CD4, CD20, CD30, CD68, CXCR5, and PD1), 
+#' and merges them into a single data frame. Note that the function assumes that the folder structure and file names are in a specific format and any deviations
+#'  will require changes to the code.
+#' @param path The path to the folder containing the MC-IF data subfolders. Under the path, there should be 6 separate folders which contain the MC-IF output
+#'        for each marker, and their names should be CD4, CD20, CD30, CD68, CXCR5, and PD1.
+#' @param markerFolders A character vector of the marker subfolder names within the main MC-IF data folder. This should include all six marker subfolders.
+#' @return A data frame containing the merged MC-IF data for all six markers.
 #' @author Yifan Yin, Aixiang Jiang
-#'
 #' @export
 #'
 merge_markerFolders<- function(path, markerFolders = c("CD30", "CD4", "CD68", "CD20","PD1","CXCR5")){
@@ -28,18 +25,18 @@ merge_markerFolders<- function(path, markerFolders = c("CD30", "CD4", "CD68", "C
   # extract the segmentation files in CD30
   seg.data <- file.in.dir[grep(']_cell_seg_data.txt',file.in.dir)]
   # extract slide ID
-  sample.data <- data.frame(IHC_ID = seg.data)
+  sample.data <- data.frame(MC_IF_ID = seg.data)
 
   # merge the data into a single dataframe
   all.data <- data.frame()
   for (i in 1:nrow(sample.data)) {
     # read summary table
-    print(paste0("Processing sample: ", sample.data$IHC_ID[i]))
+    print(paste0("Processing sample: ", sample.data$MC_IF_ID[i]))
     s.data <- data.table::data.table()
     for (m in markerFolders) {
       ## AJ: the following "\\" did not work, change to "/"
-      #m.cellTablePath <- paste0(path,'\\',  m, "\\", sample.data$IHC_ID[i]). ## this line caused error
-      m.cellTablePath <- paste0(path,'/',  m, "/", sample.data$IHC_ID[i])
+      #m.cellTablePath <- paste0(path,'\\',  m, "\\", sample.data$MC_IF_ID[i]). ## this line caused error
+      m.cellTablePath <- paste0(path,'/',  m, "/", sample.data$MC_IF_ID[i])
       m.data <- data.table::fread(m.cellTablePath)
 
       m.data <- cbind(m.data,

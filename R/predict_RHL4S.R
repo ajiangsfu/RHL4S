@@ -1,13 +1,12 @@
-#' A function to get RHL4S calls
-#' @description This is the function to calculate RHL4S LPS (Linear Predictor Score) scores and empiracal Bayes' probs,
-#' and get RHL4S calls for a new IHC data set. The required prior information is:
-#' 4 selected RHL4S spatial scores and their weights, LPS score means and sds for RHL4S POS and NEG groups
-#' @details Make sure the new IHC data is comparable to the BCCA IHC data, if not, calibration is required before calling this function
-#' @param newdat A new IHC data frame, samples are in columns, and spatial scores are in rows.
-#'  Notice that data are already pre-processed
-#' @param varsIn The model variable list
-#' @return A data frame with LPS score, Empirical Bayesian probabilities for two groups and classification
-#' @keywords RHL4S, LPS, IHC
+#' @title Get RHL4S risk group classification for a new MC-IF dataset
+#' @description This function calculates RHL4S LPS (Linear Predictor Score) scores and empirical Bayes' probabilities, and generates RHL4S risk group classification for a new MC-IF dataset. 
+#' Prior information required includes the four selected RHL4S spatial scores and their weights, as well as the LPS score means and standard deviations for the RHL4S POS and NEG groups. 
+#' This information is embedded in the package and does not need to be provided by the user.
+#' @details It is important to ensure that the new MC-IF data is comparable to the BCCA MC-IF data. If not, calibration may be required before calling this function.
+#' @param newdat A pre-processed MC-IF data frame, where samples are in columns and spatial scores are in rows.
+#' @param varsIn A list of model variables.
+#' @return A data frame with LPS scores, empirical Bayesian probabilities for two groups, and RHL4S risk grooup classification.
+#' @keywords RHL4S, LPS, MC-IF
 #' @author Aixiang Jiang
 #' @export
 

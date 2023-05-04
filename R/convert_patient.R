@@ -1,10 +1,11 @@
-
-#' @title Filter and summarize IHC cell level data into sample level
-#' @description The column names of a given data are hard coded, further changes are needed if data format is changed
-#' @param data  a dataframe which contains the spatial score, which is returned by the spatial_score function
-#' @param patient  The xlsx file with path should contain the patient information, related slide ID and low quality cores.
-#' @param core  The core used to calculate patient label data
-#' @return a dataframe which contains the marker signal for CD30, CD4, CD68, CD20 and PD1
+#' @title Filter and summarize MC-IF cell-level data into patient-level
+#' @description This function takes a data frame of cell-level spatial scores and filters out low quality cores as determined by patient information
+#' in a specified xlsx file. The remaining cores are summarized into patient-level data for the markers CD30, CD4, CD68, CD20, and PD1.
+#' The column names of a given data are hard coded, further changes are needed if data format is changed
+#' @param data A data frame with spatial scores, which are returned by the spatial_score function.
+#' @param patient The path to an xlsx file containing patient information, including related slide ID and low quality cores.
+#' @param core The core used to calculate patient-level data.
+#' @return A data frame with columns for patient ID, and marker signal for CD30, CD4, CD68, CD20, and PD1.
 #' @importFrom magrittr %>%
 #' @author Yifan Yin, Aixiang Jiang
 #' @export
@@ -85,11 +86,11 @@ convert_patient <- function(data, patient, core = "A"){
     dplyr::summarise(CXCR5pos_B_spatial_score = mean(CXCR5pos_B_spatial_score))%>%
     dplyr::select(-BCCA_ID)
 
-  IHC.patient <- cbind(CD30pos_HRS_spatial_score_patient,
+  MC_IF.patient <- cbind(CD30pos_HRS_spatial_score_patient,
                        CXCR5pos_HRS_spatial_score_patient,
                        CD68pos_Mac_spatial_score_patient,
                        PD1pos_T_spatial_score_patient,
                        CXCR5pos_B_spatial_score_patient)
 
-  return(IHC.patient)
+  return(MC_IF.patient)
 }

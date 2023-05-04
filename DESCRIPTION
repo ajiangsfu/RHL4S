@@ -1,7 +1,7 @@
 Package: RHL4S
 Type: Package
 Title: RHL4S classification for IHC data
-Version: 0.1.0
+Version: 0.1.1
 Author: Aixiang Jiang, Yifan Yin, and Alex Xu
 Maintainer: Maintainer: Aixiang Jiang <aijiang@bccrc.ca>
 Depends: R (>= 4.0)

@@ -1,7 +1,8 @@
-#' @title Calculate cell level spatial scores
-#' @description The column names of a given data are hard coded, further changes are needed if data format is changed
-#' @param data a dataframe which includes the merged results for CD30, CD4, CD68, CD20, CXCR5 and PD1
-#' @return a dataframe which contains the spatial score at cell level
+#' @title Calculate cell-level spatial scores
+#' @description This function calculates cell-level spatial scores based on the merged MC-IF results for CD4, CD20, CD30, CD68, CXCR5, and PD1 markers.
+#' The column names of the input data frame are hard-coded, so changes may be needed if the data format is different.
+#' @param data A data frame that includes the merged MC-IF results for the above-mentioned markers.
+#' @return A data frame that contains the calculated spatial scores at the cell level.
 #' @import data.table
 #' @author Alex Xu, Yifan Yin, Aixiang Jiang
 #' @export
