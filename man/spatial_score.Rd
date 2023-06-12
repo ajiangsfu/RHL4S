@@ -16,5 +16,9 @@ a dataframe which contains the spatial score at cell level
 The column names of a given data are hard coded, further changes are needed if data format is changed
 }
 \author{
+<<<<<<< HEAD
 Alex Xu, Aixiang Jiang, Yifan Yin
+=======
+Alex Xu, Yifan Yin, Aixiang Jiang
+>>>>>>> 4a5c33627ead716c5ef205cc2f09a9631f5d329f
 }

@@ -1,12 +1,13 @@
-#' A wrap-up function to get RHL4S calls from IHC raw data
-#' @description This is the function to integrate IHC data for the given markers, calculate spatial score, filer cells, summarize to patient level data,
-#'   and calculate RHL4S LPS (Linear Predictor Score) scores and empiracal Bayes' probabilities, and classification based on probability cutoff
-#' @details Make sure the new IHC data is comparable to the BCCA IHC data, if not, calibration is required
-#' @param datapath This data folder should contain 6 subfolder for each marker separately: CD30, CD4, CD68, CD20,PD1,CXCR5.
-#' @param patientFile The xlsx or xls file with path should contain the patient information, related slide ID and low quality cores.
-#' @param patientSheet The sheet name in patientFile to indicate the core used to calculate patient label data
-#' @return A data frame with patient level spatial score, LPS score, Empirical Bayesian probabilities for two groups and classification
-#' @keywords RHL4S, LPS, IHC
+
+#' @title A wrapper function to get RHL4S risk group classifications from MC-IF raw data
+#' @description This function integrates MC-IF data for the given markers, calculates spatial scores, filters cells, summarizes to patient-level data,
+#' calculates RHL4S LPS (Linear Predictor Score) scores and empirical Bayes' probabilities, and performs RHL4S risk group classification based on a probability cutoff.
+#' Prior to using this function, make sure that the new MC-IF data is comparable to the BCCA MC-IF data. Calibration may be required if the data is not comparable.
+#' @param datapath A path to the directory that contains 6 subfolders for each marker separately: CD4, CD20, CD30, CD68, CXCR5, and PD1.
+#' @param patientFile A path to the xlsx or xls file that contains patient information, related slide ID, and low quality cores.
+#' @param patientSheet The name of the sheet in patientFile that indicates the core used to calculate patient-level data.
+#' @return A data frame with patient-level spatial scores, LPS scores, empirical Bayesian probabilities for two groups, and RHL4S risk group classification.
+#' @keywords RHL4S, LPS, MC-IF
 #' @author Aixiang Jiang
 #' @export
 
@@ -23,8 +24,10 @@ RHL4Scalls = function(datapath = NULL, patientFile = NULL, patientSheet = "A"){
   colnames(patientDat) = gsub("CD68_Mac", "Mac", colnames(patientDat))
 
   res = predict_RHL4S(newdat = patientDat)
+  colnames(res) = gsub("LPS", "RHL4S", colnames(res))
 
   outs = cbind(outs, res)
 
   return(outs)
 }
+
